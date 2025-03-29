@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eid Mubarak Wishes</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Dancing+Script:wght@600&family=Poppins:wght@300;400;700&family=Great+Vibes&display=swap');
+        
+        body {
+            background: url('https://source.unsplash.com/1600x900/?eid,mosque,stars') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+        .overlay {
+            background: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .container {
+            position: relative;
+            margin-top: 100px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 15px;
+            display: inline-block;
+            box-shadow: 0 0 20px rgba(255, 223, 70, 0.8);
+            animation: fadeIn 2s ease-in;
+        }
+        h1 {
+            font-size: 3.5em;
+            font-family: 'Cinzel', serif;
+            text-shadow: 0 0 25px #ffdd00;
+        }
+        .wishes {
+            font-size: 1.7em;
+            color: #ffcc00;
+            text-shadow: 0 0 20px #ffcc00;
+            animation: glow 1.5s infinite alternate;
+        }
+        #messagePage {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+        #messagePage.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+        #typedMessage {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8em;
+            color: #ffcc00;
+            text-shadow: 0 0 15px #ff9900;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 15px #ffcc00; }
+            to { text-shadow: 0 0 30px #ff9900; }
+        }
+        button {
+            margin-top: 25px;
+            padding: 15px 35px;
+            font-size: 1.3em;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(45deg, #ff9900, #ffdd00);
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 0 15px #ff9900;
+            transition: 0.4s;
+            font-weight: bold;
+        }
+        button:hover {
+            background: linear-gradient(45deg, #ffdd00, #ff6600);
+            box-shadow: 0 0 30px #ffcc00;
+        }
+        .hidden {
+            display: none;
+        }
+        .message-tab {
+            margin-top: 20px;
+            padding: 15px 25px;
+            font-size: 1.2em;
+            background: #ffcc00;
+            color: black;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-block;
+        }
+        .message-tab:hover {
+            background: #ff9900;
+            color: white;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="container" id="welcomePage">
+        <h1>Welcome to a Special Eid Celebration! 🌙✨</h1>
+        <p class="wishes">Tap to Begin</p>
+        <button onclick="startEidWishes()">Start</button>
+    </div>
+    
+    <div class="container hidden" id="eidPage">
+        <h1>Eid Mubarak! ✨</h1>
+        <p class="wishes">May this Eid bring you peace, happiness, and prosperity.</p>
+        <br>
+        <div class="message-tab" onclick="openEnvelope()">Message for You</div>
+    </div>
+    
+    <div class="container hidden" id="messagePage">
+        <h1>Message for You</h1>
+        <div class="message-box" id="messageBox">
+            <p id="typedMessage" class="typing"></p>
+        </div>
+        <button onclick="goBack()">Go Back</button>
+    </div>
+    
+    <script>
+        function startEidWishes() {
+            document.getElementById('welcomePage').classList.add('hidden');
+            document.getElementById('eidPage').classList.remove('hidden');
+        }
+
+        function openEnvelope() {
+            setTimeout(() => {
+                document.getElementById('eidPage').classList.add('hidden');
+                let messagePage = document.getElementById('messagePage');
+                messagePage.classList.remove('hidden');
+                setTimeout(() => {
+                    messagePage.classList.add('show');
+                    typeMessage();
+                }, 500);
+            }, 1000);
+        }
+        
+        function typeMessage() {
+            const message = "Assalamualaikum Chanda, I hope this message finds you a small wish from my side. As we have come a long way, it is an immense pleasure and a blessing from Allah SWA that He has granted me life so that I can meet you one day forever. I thank Allah SWA today for giving me the most special person in my life. You are my light in the darkest days, my strength in the weakest moments, and my joy in the saddest times. May Allah bless you with endless happiness, peace, and love. Eid Mubarak, my dear.";
+            let i = 0;
+            let speed = 50;
+            let typedMessage = document.getElementById("typedMessage");
+            typedMessage.innerHTML = "";
+            function type() {
+                if (i < message.length) {
+                    typedMessage.innerHTML += message.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+        
+        function goBack() {
+            document.getElementById('messagePage').classList.add('hidden');
+            document.getElementById('eidPage').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
